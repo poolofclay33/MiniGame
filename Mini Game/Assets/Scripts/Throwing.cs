@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Throwing : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject ball;
+    public Ball ballScript;
+
+    public void ThrowBall()
+    {
+        Debug.Log("Thrown");
+        ballScript.Release();
+    }
 }

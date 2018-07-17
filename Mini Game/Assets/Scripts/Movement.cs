@@ -44,6 +44,11 @@ public class Movement : MonoBehaviour {
 
         _anim.SetBool("Grounded", controller.isGrounded);
         _anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+
+        if(Input.GetKey(KeyCode.F))
+        {
+            _anim.Play("THROW");
+        }
     }
 
     private void FixedUpdate()
