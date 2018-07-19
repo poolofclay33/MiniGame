@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
-    public GameObject parentbone;
-    public Rigidbody rigidBall;
-    public GameObject ball;
+    public Rigidbody rigidBall; 
     public Transform hand;
     private Rigidbody _instance;
 
     private void Start()
     {
-        transform.parent = parentbone.transform;
-        rigidBall.useGravity = false;
-        rigidBall.isKinematic = true;
+        //transform.parent = parentbone.transform;
+        //rigidBall.useGravity = false;
+        //rigidBall.isKinematic = true;
     }
 
     public void Release()
     {
-        transform.parent = null;
-        rigidBall.useGravity = true;
-        rigidBall.isKinematic = false;
-        transform.rotation = parentbone.transform.rotation;
-        rigidBall.AddForce(transform.forward * 20000);
+        _instance = Instantiate(rigidBall, hand.position, hand.rotation) as Rigidbody;
 
-        StartCoroutine(MakeBall());
+        //transform.parent = null;
+        //rigidBall.useGravity = true;
+        //rigidBall.isKinematic = false;
+        //transform.rotation = parentbone.transform.rotation;
+
+        _instance.AddForce(transform.forward * 19000);
+
+        StartCoroutine(WaitBoi());
     }
 
-    IEnumerator MakeBall()
+    IEnumerator WaitBoi()
     {
-        yield return new WaitForSeconds(3);
-
-        _instance = Instantiate(rigidBall, hand.position, hand.rotation);
+        yield return new WaitForSeconds(5f);
     }
 }

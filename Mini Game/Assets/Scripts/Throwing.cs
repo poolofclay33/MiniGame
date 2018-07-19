@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Throwing : MonoBehaviour {
 
-    public GameObject ball;
+    //public GameObject ball;
     public Ball ballScript;
 
     public void ThrowBall()
     {
-        Debug.Log("Thrown");
         ballScript.Release();
     }
 }
