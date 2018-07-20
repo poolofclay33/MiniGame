@@ -480,7 +480,6 @@ GameObject:
   - component: {fileID: 114783249815407696}
   - component: {fileID: 54241527501706620}
   - component: {fileID: 136902668510602030}
-  - component: {fileID: 114615721454098302}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1225,23 +1224,6 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
---- !u!114 &114615721454098302
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1882489858166248}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ca30c36b506c64aafa127f12f968fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moveSpeed: 7
-  m_turnSpeed: 200
-  m_jumpForce: 6
-  m_animator: {fileID: 95256171348188422}
-  m_rigidBody: {fileID: 54241527501706620}
-  m_controlMode: 1
 --- !u!114 &114704366168510112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1287,7 +1269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentsToDisable:
   - {fileID: 114013170448493886}
-  - {fileID: 114615721454098302}
+  - {fileID: 0}
 --- !u!136 &136902668510602030
 CapsuleCollider:
   m_ObjectHideFlags: 1

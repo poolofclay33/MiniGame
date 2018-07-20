@@ -92,8 +92,22 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        float rotation = 0;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, 100))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                this.transform.LookAt(hit.point);
+                rotation = Input.mousePosition.x - Screen.width / 2;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             m_animator.Play("THROW");
         }
