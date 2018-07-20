@@ -1,89 +1,204 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Movement : MonoBehaviour {
+public class Movement : MonoBehaviour
+{
 
-    Animator _anim;
-    public float speed;
-    public float jumpForce;
-    public float gravity;
-    private CharacterController controller;
-
-    private Vector3 moveDirection = Vector3.zero;
-
-    private Rigidbody rb;
-
-    public float speedHalved = 7.5f;
-    public float speedOrigin = 5f;
-
-    void Start()
+    private enum ControlMode
     {
-        _anim = GameObject.FindWithTag("Player").GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
-        controller = GetComponent<CharacterController>();
+        Tank,
+        Direct
+    }
+
+    [SerializeField] private float m_moveSpeed = 2;
+    [SerializeField] private float m_turnSpeed = 200;
+    [SerializeField] private float m_jumpForce = 4;
+    [SerializeField] private Animator m_animator;
+    [SerializeField] private Rigidbody m_rigidBody;
+
+    [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
+
+    private float m_currentV = 0;
+    private float m_currentH = 0;
+
+    private readonly float m_interpolation = 10;
+    private readonly float m_walkScale = 0.33f;
+    private readonly float m_backwardsWalkScale = 0.16f;
+    private readonly float m_backwardRunScale = 0.66f;
+
+    private bool m_wasGrounded;
+    private Vector3 m_currentDirection = Vector3.zero;
+
+    private float m_jumpTimeStamp = 0;
+    private float m_minJumpInterval = 0.25f;
+
+    private bool m_isGrounded;
+    private List<Collider> m_collisions = new List<Collider>();
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint[] contactPoints = collision.contacts;
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            {
+                if (!m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Add(collision.collider);
+                }
+                m_isGrounded = true;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        ContactPoint[] contactPoints = collision.contacts;
+        bool validSurfaceNormal = false;
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            {
+                validSurfaceNormal = true; break;
+            }
+        }
+
+        if (validSurfaceNormal)
+        {
+            m_isGrounded = true;
+            if (!m_collisions.Contains(collision.collider))
+            {
+                m_collisions.Add(collision.collider);
+            }
+        }
+        else
+        {
+            if (m_collisions.Contains(collision.collider))
+            {
+                m_collisions.Remove(collision.collider);
+            }
+            if (m_collisions.Count == 0) { m_isGrounded = false; }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (m_collisions.Contains(collision.collider))
+        {
+            m_collisions.Remove(collision.collider);
+        }
+        if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
     void Update()
     {
-        CharacterController controller = gameObject.GetComponent<CharacterController>();
 
-        if(controller.isGrounded) 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal") * speed, moveDirection.y, Input.GetAxis("Vertical") * speed);
-
-            if(Input.GetButtonDown("Jump")) 
-            {
-                moveDirection.y = jumpForce;
-            }
+            m_animator.Play("THROW");
         }
 
-        moveDirection.y -= gravity * Time.deltaTime;
+        m_animator.SetBool("Grounded", m_isGrounded);
 
-        controller.Move(moveDirection * Time.deltaTime);
-
-        _anim.SetBool("Grounded", controller.isGrounded);
-        _anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
-
-        if(Input.GetKey(KeyCode.Mouse0))
+        switch (m_controlMode)
         {
-            _anim.Play("THROW");
+            case ControlMode.Direct:
+                DirectUpdate();
+                break;
+
+            case ControlMode.Tank:
+                TankUpdate();
+                break;
+
+            default:
+                Debug.LogError("Unsupported state");
+                break;
         }
+
+        m_wasGrounded = m_isGrounded;
     }
 
-    private void FixedUpdate()
+    private void TankUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal"); // set a float to control horizontal input
-        float vertical = Input.GetAxis("Vertical"); // set a float to control vertical input
-        PlayerMove(horizontal, vertical); // Call the move player function sending horizontal and vertical movements
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+
+        bool walk = Input.GetKey(KeyCode.LeftShift);
+
+        if (v < 0)
+        {
+            if (walk) { v *= m_backwardsWalkScale; }
+            else { v *= m_backwardRunScale; }
+        }
+        else if (walk)
+        {
+            v *= m_walkScale;
+        }
+
+        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+        transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
+        transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
+
+        m_animator.SetFloat("Speed", m_currentV);
+
+        JumpingAndLanding();
     }
 
-    private void PlayerMove(float h, float v)
+    private void DirectUpdate()
     {
-        if (h != 0f || v != 0f) // If horizontal or vertical are pressed then continue
-        {
-            if (h != 0f && v != 0f) // If horizontal AND vertical are pressed then continue
-            {
-                speed = speedHalved; // Modify the speed to adjust for moving on an angle
-            }
-            else // If only horizontal OR vertical are pressed individually then continue
-            {
-                speed = speedOrigin; // Keep speed to it's original value
-            }
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
 
-            Vector3 targetDirection = new Vector3(h, 0f, v); // Set a direction using Vector3 based on horizontal and vertical input
-            rb.MovePosition(rb.position + targetDirection * speed * Time.deltaTime); // Move the players position based on current location while adding the new targetDirection times speed
-            RotatePlayer(targetDirection); // Call the rotate player function sending the targetDirection variable
-                                           //anim._animRun = true; // Enable the run animation
-        }
-        else    // If horizontal or vertical are not pressed then continue
+        Transform camera = Camera.main.transform;
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            //anim._animRun = false; // Disable the run animation
+            v *= m_walkScale;
+            h *= m_walkScale;
         }
+
+        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+        Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
+
+        float directionLength = direction.magnitude;
+        direction.y = 0;
+        direction = direction.normalized * directionLength;
+
+        if (direction != Vector3.zero)
+        {
+            m_currentDirection = Vector3.Slerp(m_currentDirection, direction, Time.deltaTime * m_interpolation);
+
+            transform.rotation = Quaternion.LookRotation(m_currentDirection);
+            transform.position += m_currentDirection * m_moveSpeed * Time.deltaTime;
+
+            m_animator.SetFloat("Speed", direction.magnitude);
+        }
+
+        JumpingAndLanding();
     }
 
-    private void RotatePlayer(Vector3 dir)
+    private void JumpingAndLanding()
     {
-        rb.MoveRotation(Quaternion.LookRotation(dir)); // Rotate the player to look at the new targetDirection
+        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+
+        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
+        {
+            m_jumpTimeStamp = Time.time;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+        }
+
+        if (!m_wasGrounded && m_isGrounded)
+        {
+            //m_animator.SetTrigger("Land");
+        }
+
+        if (!m_isGrounded && m_wasGrounded)
+        {
+            m_animator.SetTrigger("Jump");
+        }
     }
 }

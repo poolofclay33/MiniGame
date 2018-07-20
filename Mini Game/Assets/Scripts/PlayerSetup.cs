@@ -5,7 +5,6 @@ public class PlayerSetup : NetworkBehaviour {
 
     [SerializeField]
     Behaviour[] componentsToDisable;
-    public CharacterController control;
 
     private void Start()
     {
@@ -14,7 +13,6 @@ public class PlayerSetup : NetworkBehaviour {
             for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
-                control.enabled = false;
             }
         }
     }
