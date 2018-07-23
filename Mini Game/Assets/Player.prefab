@@ -480,6 +480,9 @@ GameObject:
   - component: {fileID: 114783249815407696}
   - component: {fileID: 54241527501706620}
   - component: {fileID: 136902668510602030}
+  - component: {fileID: 114678900303180240}
+  - component: {fileID: 114106776599490154}
+  - component: {fileID: 114119060083090476}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -904,7 +907,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1882489858166248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.83, y: -0.191, z: -5.19}
+  m_LocalPosition: {x: 7.3353024, y: 0.73, z: -2.64}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4970815049566242}
@@ -1154,6 +1157,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballScript: {fileID: 114320373421352498}
+--- !u!114 &114106776599490154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882489858166248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f40c6be63b18463990bcb678d2bf06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallMulti: 2.5
+  lowJumpMulti: 4
+--- !u!114 &114119060083090476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882489858166248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e755823eac6044d1b76d684d4766b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}
 --- !u!114 &114320373421352498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1180,7 +1209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 4
   m_turnSpeed: 200
-  m_jumpForce: 8
+  m_jumpForce: 6
   m_animator: {fileID: 95256171348188422}
   m_rigidBody: {fileID: 54241527501706620}
   m_controlMode: 1
@@ -1224,6 +1253,17 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114678900303180240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882489858166248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b276a5c066a0409ab6729f38e1eeab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114704366168510112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1269,7 +1309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentsToDisable:
   - {fileID: 114013170448493886}
-  - {fileID: 0}
+  - {fileID: 114431921047447436}
+  - {fileID: 114678900303180240}
 --- !u!136 &136902668510602030
 CapsuleCollider:
   m_ObjectHideFlags: 1
