@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Respawn : NetworkBehaviour
 {
@@ -9,6 +10,8 @@ public class Respawn : NetworkBehaviour
     public Transform respawnPoint;
 
     private NetworkStartPosition[] spawnPoints;
+
+    GameObject[] LifeCounter = new GameObject[2];
 
     private void Start()
     {
@@ -19,8 +22,15 @@ public class Respawn : NetworkBehaviour
     }
 
 
-    void OnTriggerEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
+        StartCoroutine("Wait");
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);
+        HealthCounter.health -= 1;
         RpcRespawn();
     }
 
