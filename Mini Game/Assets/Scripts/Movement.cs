@@ -94,7 +94,7 @@ public class Movement : MonoBehaviour
     {
         float rotation = 0;
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetAxis("Mouse X")<0) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
