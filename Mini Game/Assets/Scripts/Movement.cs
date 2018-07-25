@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float m_jumpForce = 4;
     [SerializeField] private Animator m_animator;
     [SerializeField] private Rigidbody m_rigidBody;
+    [SerializeField] public GameObject explosion;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
 
@@ -48,6 +49,17 @@ public class Movement : MonoBehaviour
                 }
                 m_isGrounded = true;
             }
+        }
+
+        float force = 3;
+
+        if (collision.gameObject.tag == "Ball")
+        {
+            Instantiate(explosion, transform.position, explosion.transform.rotation);
+            Vector3 dir = collision.contacts[0].point - transform.position;
+            dir = -dir.normalized;
+            GetComponent<Rigidbody>().AddForce(dir * force);
+            Debug.Log("SMAKCED");
         }
     }
 
@@ -92,6 +104,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         float rotation = 0;
 
         if(Input.GetAxis("Mouse X")<0) 
@@ -107,6 +120,8 @@ public class Movement : MonoBehaviour
             }
         }
 
+=======
+>>>>>>> 43ee690302d27628ccff5a4b559172115268bbc7
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             m_animator.Play("THROW");
@@ -212,7 +227,7 @@ public class Movement : MonoBehaviour
 
         if (!m_isGrounded && m_wasGrounded)
         {
-            m_animator.SetTrigger("Jump");
+            //m_animator.SetTrigger("Jump");
         }
     }
 }
