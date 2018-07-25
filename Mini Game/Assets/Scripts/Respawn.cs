@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class Respawn : NetworkBehaviour
 {
     public Transform player;
-    public Transform respawnPoint;
+    public static Respawn instance;
+    public int counter;
+    private int spawnPointIndex;
 
     private NetworkStartPosition[] spawnPoints;
 
@@ -15,10 +17,14 @@ public class Respawn : NetworkBehaviour
 
     private void Start()
     {
+        instance = this;
+
         if (isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
+
+        spawnPointIndex = Random.Range(0, spawnPoints.Length - 1);
     }
 
 
@@ -43,7 +49,8 @@ public class Respawn : NetworkBehaviour
 
             if (spawnPoints != null && spawnPoints.Length > 0)
             {
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                spawnPoint = spawnPoints[spawnPointIndex].transform.position;
+                counter++;
             }
 
             transform.position = spawnPoint;

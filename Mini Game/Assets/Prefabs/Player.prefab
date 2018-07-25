@@ -1182,12 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4562213539604230}
-  respawnPoint: {fileID: 4571737681354096, guid: 8b87d52d576fd4ab9b7b65f0ca7f1840,
-    type: 2}
-  LifeCounter:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  counter: 0
 --- !u!114 &114320373421352498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1217,7 +1212,6 @@ MonoBehaviour:
   m_jumpForce: 6
   m_animator: {fileID: 95256171348188422}
   m_rigidBody: {fileID: 54241527501706620}
-  dustCloud: {fileID: 0}
   explosion: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187, type: 2}
   m_controlMode: 1
 --- !u!114 &114558140794419872
@@ -1231,15 +1225,15 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.11111111
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 1
+  m_InterpolateRotation: 10
   m_InterpolateMovement: 1
 --- !u!114 &114577469610765604
 MonoBehaviour:
