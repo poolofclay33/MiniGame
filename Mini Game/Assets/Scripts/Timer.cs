@@ -17,10 +17,10 @@ public class Timer : MonoBehaviour {
     private void Start()
     {
         _startGameAnim.Play("StartGameCountdown");
-        InvokeRepeating("LoseTime", 5f, 0f);
+        //InvokeRepeating("LoseTime", 5f, 0f);
         StartCoroutine("StartTime");
     }
-
+    /*
     private void Update()
     {
         startText.text = ("" + countdownTime);
@@ -42,24 +42,36 @@ public class Timer : MonoBehaviour {
         }
     }
 
+    */
     IEnumerator StartTime()
     {
-        while (true)
+        while (countdownTime >= 1)
         {
             yield return new WaitForSeconds(1);
-            countdownTime--;
+            startText.text = ("" + --countdownTime);
+        }
+
+        startText.enabled = false;
+        _GO.Play("GO!");
+
+        while (timeLeft > 0)
+        {
+            yield return new WaitForSeconds(1);
+            countDownText.text = ("" + --timeLeft);
         }
     }
 
+    /*
     IEnumerator LoseTime()
     {
-        Debug.Log(":(");
         while(true)
         {
             yield return new WaitForSeconds(1);
             timeLeft--;
         }
     }
+
+    */
 
     private void GameOver()
     {

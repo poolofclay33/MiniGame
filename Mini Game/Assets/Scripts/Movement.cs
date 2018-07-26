@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
 
     private enum ControlMode
@@ -104,6 +105,11 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             m_animator.Play("THROW");
@@ -211,5 +217,34 @@ public class Movement : MonoBehaviour
         {
             //m_animator.SetTrigger("Jump");
         }
+    }
+
+    public Rigidbody rigidBall;
+    public Transform hand;
+    private GameObject _instance;
+    public GameObject ballprefab;
+
+    private void Start()
+    {
+        //transform.parent = parentbone.transform;
+        //rigidBall.useGravity = false;
+        //rigidBall.isKinematic = true;
+    }
+
+    [Command]
+    public void CmdRelease()
+    {
+        _instance = Instantiate(ballprefab, hand.position, hand.rotation);
+
+        //transform.parent = null;
+        //rigidBall.useGravity = true;
+        //rigidBall.isKinematic = false;
+        //transform.rotation = parentbone.transform.rotation;
+
+        _instance.GetComponent<Rigidbody>().AddForce(transform.forward * 20000);
+
+        //NetworkServer.Spawn(ballprefab);
+
+        //_instance.AddForce(transform.forward * 20000);
     }
 }

@@ -473,7 +473,6 @@ GameObject:
   - component: {fileID: 95256171348188422}
   - component: {fileID: 114431921047447436}
   - component: {fileID: 111883189149192316}
-  - component: {fileID: 114013170448493886}
   - component: {fileID: 114704366168510112}
   - component: {fileID: 114558140794419872}
   - component: {fileID: 114577469610765604}
@@ -483,6 +482,7 @@ GameObject:
   - component: {fileID: 114678900303180240}
   - component: {fileID: 114106776599490154}
   - component: {fileID: 114119060083090476}
+  - component: {fileID: 114939941477942754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1145,18 +1145,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114013170448493886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1882489858166248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b8331cbd64a44de88fe150a9ccca79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballScript: {fileID: 114320373421352498}
 --- !u!114 &114106776599490154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1214,6 +1202,9 @@ MonoBehaviour:
   m_rigidBody: {fileID: 54241527501706620}
   explosion: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187, type: 2}
   m_controlMode: 1
+  rigidBall: {fileID: 54218628348295818, guid: 6300d431aab414e51995101890932703, type: 2}
+  hand: {fileID: 4261979634569206}
+  ballprefab: {fileID: 1755665537818160, guid: 6300d431aab414e51995101890932703, type: 2}
 --- !u!114 &114558140794419872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1309,9 +1300,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentsToDisable:
-  - {fileID: 114013170448493886}
+  - {fileID: 114106776599490154}
   - {fileID: 114431921047447436}
   - {fileID: 114678900303180240}
+  - {fileID: 114119060083090476}
+--- !u!114 &114939941477942754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882489858166248}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15294e6dc3054da39249db44b6ad4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life1: {fileID: 1737904321613868, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
+  life2: {fileID: 1385592155279712, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
+  life3: {fileID: 1051459453556556, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
+  playerRespawned: {fileID: 114119060083090476}
+  player: {fileID: 1882489858166248}
 --- !u!136 &136902668510602030
 CapsuleCollider:
   m_ObjectHideFlags: 1

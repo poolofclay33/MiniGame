@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Ball : MonoBehaviour
+public class Ball : NetworkBehaviour
 {
 
     public Rigidbody rigidBall;
@@ -16,7 +17,8 @@ public class Ball : MonoBehaviour
         //rigidBall.isKinematic = true;
     }
 
-    public void Release()
+    [Command]
+    public void CmdRelease()
     {
         _instance = Instantiate(rigidBall, hand.position, hand.rotation) as Rigidbody;
 
@@ -24,6 +26,8 @@ public class Ball : MonoBehaviour
         //rigidBall.useGravity = true;
         //rigidBall.isKinematic = false;
         //transform.rotation = parentbone.transform.rotation;
+
+        //NetworkServer.Spawn(rigidBall);
 
         _instance.AddForce(transform.forward * 20000);
     }
