@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 114678900303180240}
   - component: {fileID: 114106776599490154}
   - component: {fileID: 114119060083090476}
-  - component: {fileID: 114939941477942754}
+  - component: {fileID: 114411865240834576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1184,6 +1184,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBall: {fileID: 54218628348295818, guid: 6300d431aab414e51995101890932703, type: 2}
   hand: {fileID: 4261979634569206}
+--- !u!114 &114411865240834576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882489858166248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33a483fe13964c9394cdc7ab0120ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114431921047447436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1304,22 +1315,6 @@ MonoBehaviour:
   - {fileID: 114431921047447436}
   - {fileID: 114678900303180240}
   - {fileID: 114119060083090476}
---- !u!114 &114939941477942754
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1882489858166248}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d15294e6dc3054da39249db44b6ad4aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life1: {fileID: 1737904321613868, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
-  life2: {fileID: 1385592155279712, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
-  life3: {fileID: 1051459453556556, guid: d0cbff897d27347228aefbbbe8191671, type: 2}
-  playerRespawned: {fileID: 114119060083090476}
-  player: {fileID: 1882489858166248}
 --- !u!136 &136902668510602030
 CapsuleCollider:
   m_ObjectHideFlags: 1

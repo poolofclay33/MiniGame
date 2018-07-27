@@ -60,7 +60,7 @@ public class Movement : NetworkBehaviour
             Vector3 dir = collision.contacts[0].point - transform.position;
             dir = -dir.normalized;
             GetComponent<Rigidbody>().AddForce(dir * force);
-            Debug.Log("SMAKCED");
+            Debug.Log("SMACKED");
         }
     }
 
@@ -112,7 +112,7 @@ public class Movement : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            m_animator.Play("THROW");
+            m_animator.Play("THROW"); //once player right-clicks, THROW anim will play which will call an event function to throw. 
         }
 
         m_animator.SetBool("Grounded", m_isGrounded);
@@ -224,27 +224,11 @@ public class Movement : NetworkBehaviour
     private GameObject _instance;
     public GameObject ballprefab;
 
-    private void Start()
-    {
-        //transform.parent = parentbone.transform;
-        //rigidBall.useGravity = false;
-        //rigidBall.isKinematic = true;
-    }
-
     [Command]
-    public void CmdRelease()
+    public void CmdRelease() //release function is called from THROW anim and throws the ball. 
     {
         _instance = Instantiate(ballprefab, hand.position, hand.rotation);
 
-        //transform.parent = null;
-        //rigidBall.useGravity = true;
-        //rigidBall.isKinematic = false;
-        //transform.rotation = parentbone.transform.rotation;
-
         _instance.GetComponent<Rigidbody>().AddForce(transform.forward * 20000);
-
-        //NetworkServer.Spawn(ballprefab);
-
-        //_instance.AddForce(transform.forward * 20000);
     }
 }

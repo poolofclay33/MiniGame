@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class LookAt : MonoBehaviour
+public class LookAt : NetworkBehaviour
 {
 
-    private void Update()
+    private void Update() //uses the mouse to change the rotation the player is facing.
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

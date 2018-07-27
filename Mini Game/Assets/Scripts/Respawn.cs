@@ -8,12 +8,15 @@ public class Respawn : NetworkBehaviour
 {
     public Transform player;
     public static Respawn instance;
+
+    [SyncVar]
     public int counter;
+
     private int spawnPointIndex;
 
     private NetworkStartPosition[] spawnPoints;
 
-    GameObject[] LifeCounter = new GameObject[2];
+    GameObject[] LifeCounter = new GameObject[2]; //array to hold the player's 3 lives. 
 
     private void Start()
     {
@@ -30,13 +33,13 @@ public class Respawn : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        counter++;
         StartCoroutine("Wait");
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3);
-        HealthCounter.health -= 1;
         RpcRespawn();
     }
 
@@ -49,8 +52,7 @@ public class Respawn : NetworkBehaviour
 
             if (spawnPoints != null && spawnPoints.Length > 0)
             {
-                spawnPoint = spawnPoints[spawnPointIndex].transform.position;
-                counter++;
+                spawnPoint = spawnPoints[spawnPointIndex].transform.position; //spawns player where they started originally. 
             }
 
             transform.position = spawnPoint;

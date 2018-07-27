@@ -2,31 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class HealthCounter : NetworkBehaviour
 {
-
+    [SyncVar]
     public GameObject life1, life2, life3;
-    public static int health;
     public Respawn playerRespawned;
     public GameObject player;
 
-    // Use this for initialization
+    public DestroyPlayer death;
+
     void Start()
     {
-
         life1.gameObject.SetActive(true);
         life2.gameObject.SetActive(true);
         life3.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() //references the respawn script to take away a life from the player once they respawn.
     {
-        if(!isServer)
-        {
-            return;
-        }
 
         if (Respawn.instance.counter == 1)
         {
@@ -41,6 +36,8 @@ public class HealthCounter : NetworkBehaviour
         if (Respawn.instance.counter == 3)
         {
             life1.gameObject.SetActive(false);
+
+            DestroyPlayer.instance.KillPlayer(); //destroy player once their third life is up. 
         }
     }
 }
