@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        float force = 3;
+        float force = 10000;
 
         if (collision.gameObject.tag == "Ball")
         {
