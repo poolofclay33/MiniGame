@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
 
     private enum ControlMode
@@ -59,7 +60,7 @@ public class Movement : MonoBehaviour
             Vector3 dir = collision.contacts[0].point - transform.position;
             dir = -dir.normalized;
             GetComponent<Rigidbody>().AddForce(dir * force);
-            Debug.Log("SMAKCED");
+            Debug.Log("SMACKED");
         }
     }
 
@@ -105,6 +106,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         float rotation = 0;
 
         if(Input.GetAxis("Mouse X")<0) 
@@ -122,9 +124,16 @@ public class Movement : MonoBehaviour
 
 =======
 >>>>>>> 43ee690302d27628ccff5a4b559172115268bbc7
+=======
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
+>>>>>>> b0e40b544f9f5e97dbc9b645275bdf7c814821d2
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            m_animator.Play("THROW");
+            m_animator.Play("THROW"); //once player right-clicks, THROW anim will play which will call an event function to throw. 
         }
 
         m_animator.SetBool("Grounded", m_isGrounded);
@@ -229,5 +238,18 @@ public class Movement : MonoBehaviour
         {
             //m_animator.SetTrigger("Jump");
         }
+    }
+
+    public Rigidbody rigidBall;
+    public Transform hand;
+    private GameObject _instance;
+    public GameObject ballprefab;
+
+    [Command]
+    public void CmdRelease() //release function is called from THROW anim and throws the ball. 
+    {
+        _instance = Instantiate(ballprefab, hand.position, hand.rotation);
+
+        _instance.GetComponent<Rigidbody>().AddForce(transform.forward * 20000);
     }
 }

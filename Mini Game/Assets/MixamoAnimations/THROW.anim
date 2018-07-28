@@ -25416,7 +25416,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0.36666667
-    functionName: ThrowBall
+    functionName: CmdRelease
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: e1b8331cbd64a44de88fe150a9ccca79,
       type: 3}

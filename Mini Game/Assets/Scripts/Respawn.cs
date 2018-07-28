@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Respawn : NetworkBehaviour
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Transform player;
     public Transform respawnPoint;
 
@@ -14,6 +15,20 @@ public class Respawn : NetworkBehaviour
 
     GameObject[] LifeCounter = new GameObject[2];
 
+=======
+    public Transform player;
+    public static Respawn instance;
+
+    [SyncVar]
+    public int counter;
+
+    private int spawnPointIndex;
+
+    private NetworkStartPosition[] spawnPoints;
+
+    GameObject[] LifeCounter = new GameObject[2]; //array to hold the player's 3 lives. 
+
+>>>>>>> b0e40b544f9f5e97dbc9b645275bdf7c814821d2
     private void Start()
     {
         if (isLocalPlayer)
@@ -71,6 +86,7 @@ public class Respawn : NetworkBehaviour
         }
 
         spawnPointIndex = Random.Range(0, spawnPoints.Length - 1);
+<<<<<<< HEAD
     }
 
 
@@ -104,3 +120,36 @@ public class Respawn : NetworkBehaviour
     }
 }
 >>>>>>> 95f590fc6450d38e70b454c3018110fbe2aa0997
+=======
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        counter++;
+        StartCoroutine("Wait");
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);
+        RpcRespawn();
+    }
+
+    [ClientRpc]
+    private void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            Vector3 spawnPoint = Vector3.zero;
+
+            if (spawnPoints != null && spawnPoints.Length > 0)
+            {
+                spawnPoint = spawnPoints[spawnPointIndex].transform.position; //spawns player where they started originally. 
+            }
+
+            transform.position = spawnPoint;
+        }
+    }
+}
+>>>>>>> b0e40b544f9f5e97dbc9b645275bdf7c814821d2
