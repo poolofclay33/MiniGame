@@ -105,11 +105,32 @@ public class Movement : NetworkBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        float rotation = 0;
+
+        if(Input.GetAxis("Mouse X")<0) 
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, 100))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                this.transform.LookAt(hit.point);
+                rotation = Input.mousePosition.x - Screen.width / 2;
+            }
+        }
+
+=======
+>>>>>>> 43ee690302d27628ccff5a4b559172115268bbc7
+=======
         if(!isLocalPlayer)
         {
             return;
         }
 
+>>>>>>> b0e40b544f9f5e97dbc9b645275bdf7c814821d2
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             m_animator.Play("THROW"); //once player right-clicks, THROW anim will play which will call an event function to throw. 
