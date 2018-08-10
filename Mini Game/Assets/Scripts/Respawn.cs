@@ -33,18 +33,20 @@ public class Respawn : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         counter++;
+        Debug.Log("LIFETAKEN");
         StartCoroutine("Wait");
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3);
-        RpcRespawn();
+        CmdRespawn();
     }
 
-    [ClientRpc]
-    private void RpcRespawn()
+    [Command]
+    private void CmdRespawn()
     {
         if (isLocalPlayer)
         {

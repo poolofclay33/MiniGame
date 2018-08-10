@@ -8,8 +8,6 @@ public class HealthCounter : NetworkBehaviour
 {
     [SyncVar]
     public GameObject life1, life2, life3;
-    public Respawn playerRespawned;
-    public GameObject player;
 
     public DestroyPlayer death;
 
@@ -20,8 +18,20 @@ public class HealthCounter : NetworkBehaviour
         life3.gameObject.SetActive(true);
     }
 
-    void Update() //references the respawn script to take away a life from the player once they respawn.
+    void Update()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
+        CmdtakeLife();
+    }
+
+    [Command]
+    void CmdtakeLife()
+    {
+        Debug.Log("CALLED");
 
         if (Respawn.instance.counter == 1)
         {
@@ -37,7 +47,7 @@ public class HealthCounter : NetworkBehaviour
         {
             life1.gameObject.SetActive(false);
 
-            DestroyPlayer.instance.KillPlayer(); //destroy player once their third life is up. 
+            DestroyPlayer.instance.KillPlayer();
         }
     }
 }

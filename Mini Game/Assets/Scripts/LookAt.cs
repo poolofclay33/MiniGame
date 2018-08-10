@@ -8,6 +8,11 @@ public class LookAt : NetworkBehaviour
 
     private void Update() //uses the mouse to change the rotation the player is facing.
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         Plane plane = new Plane(Vector3.up, Vector3.zero);
