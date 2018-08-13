@@ -37,11 +37,11 @@ public class Respawn : NetworkBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3);
-        CmdRespawn();
+        RpcRespawn();
     }
 
-    [Command]
-    private void CmdRespawn()
+    [ClientRpc]
+    private void RpcRespawn()
     {
         if (isLocalPlayer)
         {

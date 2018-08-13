@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class LookAt : NetworkBehaviour
 {
-
     private void Update() //uses the mouse to change the rotation the player is facing.
     {
         if(!isLocalPlayer)

@@ -25,12 +25,16 @@ public class HealthCounter : NetworkBehaviour
             return;
         }
 
-        CmdtakeLife();
+        takeLife();
     }
 
-    [Command]
-    void CmdtakeLife()
+    void takeLife()
     {
+        if(!isServer)
+        {
+            return;
+        }
+
         if (Respawn.instance.counter == 1)
         {
             life3.gameObject.SetActive(false);

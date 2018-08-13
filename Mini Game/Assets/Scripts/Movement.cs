@@ -110,7 +110,7 @@ public class Movement : NetworkBehaviour
             return;
         }
 
-        float rotation;
+        //float rotation;
 
         if(Input.GetAxis("Mouse X")<0) 
         {
@@ -121,7 +121,7 @@ public class Movement : NetworkBehaviour
             {
                 Debug.DrawLine(ray.origin, hit.point);
                 this.transform.LookAt(hit.point);
-                rotation = Input.mousePosition.x - Screen.width / 2;
+                //rotation = Input.mousePosition.x - Screen.width / 2;
             }
         }
 
