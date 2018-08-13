@@ -110,7 +110,7 @@ public class Movement : NetworkBehaviour
             return;
         }
 
-        float rotation = 0;
+        float rotation;
 
         if(Input.GetAxis("Mouse X")<0) 
         {

@@ -13,7 +13,7 @@ public class Respawn : NetworkBehaviour
 
     private NetworkStartPosition[] spawnPoints;
 
-    GameObject[] LifeCounter = new GameObject[2];
+    //GameObject[] LifeCounter = new GameObject[2];
 
     private void Start()
     {
@@ -31,7 +31,6 @@ public class Respawn : NetworkBehaviour
     void OnTriggerEnter(Collider other)
     {
         counter++;
-        Debug.Log("LIFETAKEN");
         StartCoroutine("Wait");
     }
 

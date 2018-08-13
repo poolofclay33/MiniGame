@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 114218662809231226}
   - component: {fileID: 114861611374528328}
   - component: {fileID: 114621077664773698}
-  - component: {fileID: 114373532352887708}
+  - component: {fileID: 114505172187071016}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2101,24 +2101,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &114373532352887708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1368210660750472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0841de2ab59c64bd5a09e4e87ed22fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLeft: 10
-  countDownText: {fileID: 114186353481314038}
-  _gameOverAnim: {fileID: 95065221221157060}
-  _startGameAnim: {fileID: 95705111383598580}
-  countdownTime: 5
-  startText: {fileID: 114186353481314038}
-  _GO: {fileID: 95364440147099850}
 --- !u!114 &114406805449806458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2177,6 +2159,23 @@ MonoBehaviour:
   rigidBall: {fileID: 54218628348295818, guid: 6300d431aab414e51995101890932703, type: 2}
   hand: {fileID: 4261979634569206}
   ballprefab: {fileID: 1755665537818160, guid: 6300d431aab414e51995101890932703, type: 2}
+--- !u!114 &114505172187071016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368210660750472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbe34ac3157c5c48b9a8baad957aac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLeft: 10
+  countDownText: {fileID: 114840238691823918}
+  _gameOverAnim: {fileID: 95065221221157060}
+  _startGameAnim: {fileID: 95705111383598580}
+  startText: {fileID: 114186353481314038}
+  _GO: {fileID: 95364440147099850}
 --- !u!114 &114511153863018710
 MonoBehaviour:
   m_ObjectHideFlags: 1

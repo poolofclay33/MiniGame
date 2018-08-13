@@ -31,8 +31,6 @@ public class HealthCounter : NetworkBehaviour
     [Command]
     void CmdtakeLife()
     {
-        Debug.Log("CALLED");
-
         if (Respawn.instance.counter == 1)
         {
             life3.gameObject.SetActive(false);
