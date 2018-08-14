@@ -1199,7 +1199,8 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4562213539604230, guid: 16660030a45bf4e07bd107a3c3ee6690,
+        type: 2}
     - target: {fileID: 114011551054208270, guid: 9086edfa6202f42ae96a62fc0c58195b,
         type: 2}
       propertyPath: respawnPoint
@@ -1218,7 +1219,8 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114011551054208270, guid: 9086edfa6202f42ae96a62fc0c58195b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9086edfa6202f42ae96a62fc0c58195b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1190145659
@@ -1594,7 +1596,7 @@ MonoBehaviour:
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
   m_OfflineScene: Offline
-  m_OnlineScene: Online
+  m_OnlineScene: Battle
   m_SpawnPrefabs:
   - {fileID: 1755665537818160, guid: 6300d431aab414e51995101890932703, type: 2}
   m_CustomConfig: 0

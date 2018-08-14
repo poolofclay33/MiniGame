@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Online.unity
+    path: Assets/SampleScenes/Scenes/NetworkLobby.unity
+    guid: 3c0d76c55eed6214f9d3b070caede5d3
+  - enabled: 1
+    path: Assets/SampleScenes/Scenes/NetworkSpaceship.unity
+    guid: 7f858b30832aff046a2278ab9ef04e1a
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
     guid: 4c06186488e7ac8448e5903af369bd27
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 5c0a941e4a88744a08547c5989aaef96
-  - enabled: 1
-    path: Assets/Scenes/Offline.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}

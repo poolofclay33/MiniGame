@@ -13,8 +13,6 @@ public class Respawn : NetworkBehaviour
 
     private NetworkStartPosition[] spawnPoints;
 
-    //GameObject[] LifeCounter = new GameObject[2];
-
     private void Start()
     {
         instance = this;
@@ -49,7 +47,7 @@ public class Respawn : NetworkBehaviour
 
             if (spawnPoints != null && spawnPoints.Length > 0)
             {
-                spawnPoint = spawnPoints[spawnPointIndex].transform.position; //spawns player where they started originally. 
+                spawnPoint = spawnPoints[spawnPointIndex].transform.position;
             }
 
             transform.position = spawnPoint;
