@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/SampleScenes/Scenes/NetworkLobby.unity
     guid: 3c0d76c55eed6214f9d3b070caede5d3
   - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 4c06186488e7ac8448e5903af369bd27
+  - enabled: 1
     path: Assets/SampleScenes/Scenes/NetworkSpaceship.unity
     guid: 7f858b30832aff046a2278ab9ef04e1a
   - enabled: 1
-    path: Assets/Scenes/Battle.unity
-    guid: 4c06186488e7ac8448e5903af369bd27
+    path: Assets/Scenes/Race.unity
+    guid: d12dae8efd9c84d99b65d49eb8b265b8
   m_configObjects: {}

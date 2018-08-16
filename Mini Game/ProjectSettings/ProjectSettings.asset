@@ -732,7 +732,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
   cloudProjectId: c72d1a01-004b-44f3-bde7-756e96f97638
-  projectName: Networking Lobby
+  projectName: Mini Game
   organizationId: poolofclay33
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
