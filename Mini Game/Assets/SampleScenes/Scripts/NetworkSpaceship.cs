@@ -42,7 +42,7 @@ public class NetworkSpaceship : NetworkBehaviour
     void Awake()
     {
         //register the spaceship in the gamemanager, that will allow to loop on it.
-        NetworkGameManager.sShips.Add(this);
+        //NetworkGameManager.sShips.Add(this);
     }
 
     void Start()
@@ -83,7 +83,7 @@ public class NetworkSpaceship : NetworkBehaviour
 
     void OnDestroy()
     {
-        NetworkGameManager.sShips.Remove(this);
+        //NetworkGameManager.sShips.Remove(this);
     }
 
     [ClientCallback]
@@ -240,7 +240,7 @@ public class NetworkSpaceship : NetworkBehaviour
         if (lifeCount > 0)
         {
             //we start the coroutine on the manager, as disabling a gameobject stop ALL coroutine started by it
-            NetworkGameManager.sInstance.StartCoroutine(NetworkGameManager.sInstance.WaitForRespawn(this));
+            //NetworkGameManager.sInstance.StartCoroutine(NetworkGameManager.sInstance.WaitForRespawn(this));
         }
     }
 

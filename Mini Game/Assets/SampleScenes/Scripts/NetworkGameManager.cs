@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 public class NetworkGameManager : NetworkBehaviour
 {
-    static public List<NetworkSpaceship> sShips = new List<NetworkSpaceship>();
+    static public List<PlayerManager> player = new List<PlayerManager>();
     static public NetworkGameManager sInstance = null;
 
     public GameObject uiScoreZone;
     public Font uiScoreFont;
     
     [Header("Gameplay")]
-    //Those are sorte dby level 0 == lowest etc...
+    //Those are sorted by level 0 == lowest etc...
     public GameObject[] asteroidPrefabs;
 
     [Space]
@@ -33,27 +33,27 @@ public class NetworkGameManager : NetworkBehaviour
             StartCoroutine(AsteroidCoroutine());
         }
 
-        for(int i = 0; i < sShips.Count; ++i)
+        for(int i = 0; i < player.Count; ++i)
         {
-            sShips[i].Init();
+            player[i].Init();
         }
     }
 
     [ServerCallback]
     void Update()
     {
-        if (!_running || sShips.Count == 0)
+        if (!_running || player.Count == 0)
             return;
 
         bool allDestroyed = true;
-        for (int i = 0; i < sShips.Count; ++i)
+        for (int i = 0; i < player.Count; ++i)
         {
-            allDestroyed &= (sShips[i].lifeCount == 0);
+            allDestroyed &= (player[i].lifeCount == 0);
         }
 
         if(allDestroyed)
         {
-            StartCoroutine(ReturnToLoby());
+            StartCoroutine(ReturnToLobby());
         }
     }
 
@@ -67,12 +67,14 @@ public class NetworkGameManager : NetworkBehaviour
         }
     }
 
+    /*
     IEnumerator ReturnToLoby()
     {
         _running = false;
         yield return new WaitForSeconds(3.0f);
         LobbyManager.s_Singleton.ServerReturnToLobby();
     }
+    */
 
     IEnumerator AsteroidCoroutine()
     {
@@ -113,7 +115,7 @@ public class NetworkGameManager : NetworkBehaviour
     }
 
 
-    public IEnumerator WaitForRespawn(NetworkSpaceship ship)
+    public IEnumerator WaitForRespawn(PlayerManager ship)
     {
         yield return new WaitForSeconds(4.0f);
 
