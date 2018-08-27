@@ -157,6 +157,7 @@ public class PlayerManager : NetworkBehaviour
                 _scoreText.text += "X";
         }
     }
+<<<<<<< HEAD
 
     //===================================
 
@@ -223,3 +224,6 @@ public class PlayerManager : NetworkBehaviour
     }
 }
 
+=======
+}
+>>>>>>> f92e2187fd3ef099276c99000c049f468cc762ca
