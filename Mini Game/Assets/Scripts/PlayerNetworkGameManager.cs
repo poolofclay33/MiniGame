@@ -23,7 +23,7 @@ public class PlayerNetworkGameManager : NetworkBehaviour
 
     void Awake()
     {
-       // sInstance = this;
+       sInstance = this;
     }
 
     void Start()
@@ -115,10 +115,10 @@ public class PlayerNetworkGameManager : NetworkBehaviour
     }
 
 
-    public IEnumerator WaitForRespawn(PlayerManager ship)
+    public IEnumerator WaitForRespawn(PlayerManager player)
     {
         yield return new WaitForSeconds(4.0f);
 
-        ship.Respawn();
+        player.Respawn();
     }
 }

@@ -17,14 +17,8 @@ public class PlayerManager : NetworkBehaviour
     public int lifeCount;
 
     protected Rigidbody _rigidbody;
-    protected Collider _collider;
+    protected CapsuleCollider _collider;
     protected Text _scoreText;
-
-    protected float _rotation = 0;
-    protected float _acceleration = 0;
-
-    protected float _shootingTimer = 0;
-
     protected bool _canControl = true;
 
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
@@ -40,15 +34,13 @@ public class PlayerManager : NetworkBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<CapsuleCollider>();
 
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
-            r.material.color = color;
+            //r.material.color = color;
 
         //We don't want to handle collision on client, so disable collider there
-        _collider.enabled = isServer;
-
 
         if (PlayerNetworkGameManager.sInstance != null)
         {//we MAY be awake late (see comment on _wasInit above), so if the instance is already there we init
@@ -157,13 +149,10 @@ public class PlayerManager : NetworkBehaviour
                 _scoreText.text += "X";
         }
     }
-<<<<<<< HEAD
-
-    //===================================
 
     //We can't disable the whole object, as it would impair synchronisation/communication
     //So disabling mean disabling collider & renderer only
-    public void EnableSpaceShip(bool enable)
+    public void EnablePlayer(bool enable)
     {
         GetComponent<Renderer>().enabled = enable;
         _collider.enabled = isServer && enable;
@@ -177,7 +166,7 @@ public class PlayerManager : NetworkBehaviour
         if (!_canControl)
             return;//already destroyed, happen if destroyed Locally, Rpc will call that later
 
-        EnableSpaceShip(false);
+        EnablePlayer(false);
     }
 
     //this tell the game this should ONLY be called on server, will ignore call on client & produce a warning
@@ -187,7 +176,7 @@ public class PlayerManager : NetworkBehaviour
         lifeCount -= 1;
 
         RpcDestroyed();
-        EnableSpaceShip(false);
+        EnablePlayer(false);
 
         if (lifeCount > 0)
         {
@@ -199,7 +188,7 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void Respawn()
     {
-        EnableSpaceShip(true);
+        EnablePlayer(true);
         RpcRespawn();
     }
 
@@ -220,10 +209,6 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void RpcRespawn()
     {
-        EnableSpaceShip(true);
+        EnablePlayer(true);
     }
 }
-
-=======
-}
->>>>>>> f92e2187fd3ef099276c99000c049f468cc762ca

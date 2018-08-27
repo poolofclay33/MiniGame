@@ -53,7 +53,7 @@ public class NetworkGameManager : NetworkBehaviour
 
         if(allDestroyed)
         {
-            StartCoroutine(ReturnToLobby());
+            //StartCoroutine(ReturnToLobby());
         }
     }
 
@@ -68,7 +68,7 @@ public class NetworkGameManager : NetworkBehaviour
     }
 
     /*
-    IEnumerator ReturnToLoby()
+    IEnumerator ReturnToLobby()
     {
         _running = false;
         yield return new WaitForSeconds(3.0f);
@@ -89,7 +89,7 @@ public class NetworkGameManager : NetworkBehaviour
             Vector3 position = Vector3.zero;
 
             if(Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-            {//make it appear on the side
+            {//make it appear on the side 
                 position = new Vector3( Mathf.Sign(dir.x)* Camera.main.orthographicSize * Camera.main.aspect, 
                                         0, 
                                         dir.y * Camera.main.orthographicSize);
