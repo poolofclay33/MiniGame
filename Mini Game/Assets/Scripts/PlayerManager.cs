@@ -35,6 +35,4 @@ public class PlayerManager : NetworkBehaviour {
                 _scoreText.text += "X";
         }
     }
-
-
 }
